@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Style.css">
+    <title>Rock, Paper, Scissors</title>
+</head>
+<body>
+<center>
+    <!--User input textbox-->
+    <div class="gameboard" id="game">
+    <h4>Choose your weapon</h4>
+    <input type="text" id="input">
+    <!--Play button-->
+    <button onclick="Press()">Play</button>
+    </div>
+    <br>
+    <div id="items">
+        <div id="player">
+            <h4>Player</h4>
+        </div>
+        <h2>Versus</h2>
+        <div id="computer">
+            <h4>Computer</h4>
+        </div> <br>
+        <div id="place">
+
+        </div>
+    </div>
+</center>
+</body>
+</html>
+
+<script>
+    var gameboard = document.getElementById("game");
+    //Variable to declare the winner
+    var Winner = document.createElement('h3');
+    Winner.id = "Winner";
+    //Function for user choice using input textbox
+    function getUserChoice(userInput){
+        //Receive user input from input textbox
+        let Userinput = document.getElementById("input").value;
+            userInput = Userinput.toLowerCase();
+       return userInput;
+    }
+   function getComputerChoice(){
+    var choice;
+    choice = Math.floor(Math.random()*3 +1);
+    
+    switch(choice){
+        case 1:
+          
+            return 'rock';
+
+        case 2:
+      
+            return 'paper';
+
+            case 3:
+           
+            return 'scissors';
+    }
+
+    }
+    //picture function for the player
+    function picture(choice){
+        var player = document.getElementById("player");
+        var img = document.createElement("img");
+        img.id="image"
+        if(choice === 'rock'){
+            img.src = "Rock.jpeg"
+            player.appendChild(img);
+        }
+
+        else if(choice === 'paper'){
+        img.src = "Paper.jpeg"
+        player.appendChild(img);
+        }
+
+        else if(choice==='scissors'){
+        img.src = "Scissors.jpeg"
+        player.appendChild(img);
+        }
+     
+    
+     }
+   
+    
+    //Picture function for the computer
+    function cpicture(choice){
+    var computer = document.getElementById("computer");
+    var cimg = document.createElement("img");
+
+        cimg.id="cimage"
+        if(choice === 'rock'){
+            cimg.src = "Rock.jpeg"
+            computer.appendChild(cimg);
+        }
+
+        else if(choice === 'paper'){
+        cimg.src = "Paper.jpeg"
+        computer.appendChild(cimg);
+        }
+
+        else if(choice==='scissors'){
+       cimg.src = "Scissors.jpeg"
+        computer.appendChild(cimg);
+        }
+      
+    }
+    function play(){
+
+            console.log("The results");
+            let Play1 = getUserChoice();
+            //If Statement for Player picture
+            if(Play1 === 'rock'){
+                picture('rock');
+            }
+                else if(Play1 === 'paper'){
+                picture('paper');
+            }
+            else if(Play1 === 'scissors'){
+                picture('scissors');
+            }
+            let Cpu = getComputerChoice(); 
+            if(Cpu === 'rock'){
+                cpicture('rock');
+            }
+            else if(Cpu === 'paper'){
+                cpicture('paper');
+            }
+            else if(Cpu === 'scissors'){
+                cpicture('scissors');
+            }
+            
+            console.log(Play1+" Vs "+Cpu );
+            if(Play1 === Cpu){
+                Winner.innerHTML = "Draw"
+                console.log("The winner is KingEmperor");
+                console.log("Draw")
+            }
+            else if(Play1 === "rock" && Cpu === "scissors" || Play1 === "paper" && Cpu === "rock" || Play1 === "scissors" && Cpu === "paper"){
+                Winner.innerHTML = "The winner is Player"
+                document.body.appendChild(Winner);
+                console.log("The winner is KingEmperor");
+            }
+            else if(Cpu === "rock" && Play1 === "scissors" || Cpu === "paper" && Play1 === "rock" || Cpu === "scissors" && Play1 === "paper"){
+                Winner.innerHTML = "The winner is the Computer"
+                document.body.appendChild(Winner);
+                console.log("The winner is Computeria");
+            }
+            else{
+                Winner.innerHTML = "The winner is Player"
+                document.body.appendChild(Winner);
+                console.log("The winner is KingEmperor");
+            }
+    }
+
+    //functions for cleaning images and text for next round
+    function clear(){    
+        player.innerHTML = "";
+        computer.innerHTML = "";
+        Winner.innerHTML = "";
+        //document.getElementById("Winner").innerHTML = " ";
+     }
+      
+   function Press(){
+   clear();
+    var choice;
+        choice =  getUserChoice(choice);
+       
+       
+       if(choice === "rock" || choice === "paper" || choice === "scissors"){
+            play();
+        }
+        else{
+            console.log("Incorrect choice")
+        }
+        }
+</script>
